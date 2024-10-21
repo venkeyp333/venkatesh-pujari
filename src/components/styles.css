@@ -1,0 +1,36 @@
+.projects-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    min-height: 100vh; /* Full height to enable vertical centering */
+  }
+  
+  .project-image-section {
+    position: relative;
+    margin-bottom: 40px; /* Space between sections */
+    text-align: center; /* Center the heading */
+  }
+  
+  .project-image-section img {
+    width: 100%; /* Adjust to fit the container */
+    max-width: 600px; /* Set a maximum width */
+    height: auto;
+    border-radius: 8px; /* Optional: for rounded corners */
+  }
+  
+  .project-image-section h2 {
+    margin-top: 10px; /* Space between image and title */
+    color: inherit; /* Use inherited color (dark/light mode) */
+  }
+  
+  .progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 5px;
+    background: #007bff; /* Adjust color to your theme */
+    width: 100%;
+    transform-origin: 0;
+  }
+  
