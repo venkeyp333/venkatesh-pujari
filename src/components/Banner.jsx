@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux'; // Import useSelector
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux"; // Import useSelector
+import { motion } from "framer-motion";
 import Typewriter from "typewriter-effect";
-import bannerImage from '../assets/img/Hacker.png'; 
+import bannerImage from "../assets/img/Hacker.png";
 
 const Banner = () => {
   const bannerRef = useRef(null);
@@ -13,15 +13,18 @@ const Banner = () => {
   const secondLineText = "Full Stack Developer";
 
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsVisible(true);
-        setIsImageVisible(true);
-      } else {
-        setIsVisible(false);
-        setIsImageVisible(false);
-      }
-    }, { threshold: 0.1 });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          setIsImageVisible(true);
+        } else {
+          setIsVisible(false);
+          setIsImageVisible(false);
+        }
+      },
+      { threshold: 0.1 }
+    );
 
     if (bannerRef.current) {
       observer.observe(bannerRef.current);
@@ -37,7 +40,9 @@ const Banner = () => {
   return (
     <section
       ref={bannerRef}
-      className={`banner ${darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"} min-h-screen flex items-center relative`}
+      className={`banner ${
+        darkMode ? "bg-gray-900 text-black" : "bg-white text-gray-900"
+      } min-h-screen flex items-center relative`}
       id="home"
     >
       <div className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 opacity-50"></div>
@@ -65,9 +70,8 @@ const Banner = () => {
               }}
             />
           </h1>
-          <p className="mb-6 text-sm sm:text-base leading-relaxed">
-            I am a hardworking and flexible CSE graduate with a strong dedication to establishing myself within an organization. 
-            I am eager to apply my skills, embrace new challenges, and actively contribute to enhancing the productivity and success of an organization.
+          <p className={`mb-6 text-lg sm:text-xl font-semibold leading-relaxed ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+            I am a hardworking and flexible CSE graduate with a strong dedication to establishing myself within an organization. I am eager to apply my skills, embrace new challenges, and actively contribute to enhancing the productivity and success of an organization.
           </p>
         </div>
         {isImageVisible && (

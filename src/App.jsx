@@ -19,6 +19,7 @@ function App() {
   const [isContactOpen, setIsContactOpen] = useState(false); // State to toggle Contact component
 
   const toggleContact = () => {
+    console.log('Toggle Contact Clicked'); // Debugging line
     setIsContactOpen(!isContactOpen); // Toggle the Contact component visibility
   };
 
