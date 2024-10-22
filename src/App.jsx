@@ -1,16 +1,18 @@
-import { useState } from 'react'; // Import useState for toggling Contact visibility
+import { Suspense, lazy, useState } from 'react';
 import { FaEnvelope } from 'react-icons/fa'; // Import an envelope icon for the floating button
 import { NavBar } from "./components/NavBar";
-import { Banner } from "./components/Banner";
-import { Skills } from "./components/Skills";
-import { Projects } from "./components/Projects";
-import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import './index.css';
-
 import { useSelector } from "react-redux"; // Import useSelector
-import Education from "./components/Education";
-import Hobbies from "./components/Hobbies";
+import ErrorBoundary from './components/ErrorBoundary'; // Import ErrorBoundary
+
+// Lazy load components
+const Banner = lazy(() => import("./components/Banner"));
+const Skills = lazy(() => import("./components/Skills"));
+const Projects = lazy(() => import("./components/Projects"));
+const Education = lazy(() => import("./components/Education"));
+const Hobbies = lazy(() => import("./components/Hobbies"));
+const Contact = lazy(() => import("./components/Contact"));
 
 function App() {
   const darkMode = useSelector((state) => state.theme.darkMode); // Get dark mode state from Redux
@@ -24,18 +26,26 @@ function App() {
     <div className={`App min-h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'} pt-16`}>
       {/* Sticky Navbar */}
       <NavBar />
-      
-      {/* Responsive sections */}
-      <Banner />
-      <Skills />
-      <Projects />
-      <Education />
-      <Hobbies />
+
+      {/* Suspense wrapper with ErrorBoundary for lazy-loaded components */}
+      <ErrorBoundary>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Banner />
+          <Skills />
+          <Projects />
+          <Education />
+          <Hobbies />
+        </Suspense>
+      </ErrorBoundary>
 
       {/* Conditionally render the Contact component at the bottom */}
       {isContactOpen && (
-        <div className="fixed bottom-0 left-0 w-full">
-          <Contact />
+        <div className="fixed bottom-0 left-0 w-full z-50">
+          <ErrorBoundary>
+            <Suspense fallback={<div>Loading Contact...</div>}>
+              <Contact />
+            </Suspense>
+          </ErrorBoundary>
         </div>
       )}
 
@@ -44,7 +54,7 @@ function App() {
 
       {/* Floating contact icon at the bottom right */}
       <button 
-        className="fixed bottom-8 right-8 bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-600 transition"
+        className="fixed bottom-8 right-8 bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-600 transition-transform transform hover:scale-105"
         onClick={toggleContact}
         aria-label="Contact Us"
       >

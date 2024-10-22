@@ -1,3 +1,4 @@
+import React from 'react'
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux"; // Import useSelector for Redux
@@ -23,8 +24,8 @@ import oracleIcon from "../assets/SkillsLogo/oracle-logo.svg";
 import PostGress from "../assets/SkillsLogo/postgresql.svg";
 import firebase from "../assets/SkillsLogo/firebase.svg";
 
+function Skills() {
 
-export const Skills = () => {
   const darkMode = useSelector((state) => state.theme.darkMode); // Get dark mode state from Redux
 
   const skills = [
@@ -132,183 +133,184 @@ export const Skills = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [words]);
-
   return (
-    <section
-      className={`${darkMode ? "bg-gray-900" : "bg-gray-100 "} py-20 relative`}
-      id="skills"
-      ref={ref}
-    >
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2
-            className={`${
-              darkMode ? "text-white" : "text-gray-900"
-            } text-4xl font-bold`}
-          >
-            Skills
-          </h2>
-        </div>
-
-        {/* Animate words */}
-        <div className="flex flex-wrap justify-center mb-10">
-          {words.map((word, index) => (
-            <motion.span
-              key={index}
-              id={`word-${index}`} // Assign an ID to each word
-              initial={{ opacity: 0, y: 20 }}
-              animate={
-                visibleWords[index]
-                  ? { opacity: 1, y: 0 }
-                  : { opacity: 0, y: 20 }
-              } // Animate based on visibility
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`${
-                darkMode ? "text-gray-300" : "text-black"
-              } text-xl font-medium mr-2 mb-2`}
-            >
-              {word}
-            </motion.span>
-          ))}
-        </div>
-
-        {/* Programming Languages Section */}
-        <div className="mb-10">
-          <h3
-            className={`${
-              darkMode ? "text-white" : "text-gray-900"
-            } text-2xl font-semibold mb-4`}
-          >
-            Programming Languages
-          </h3>
-          <Carousel
-            responsive={responsive}
-            infinite={true}
-            className="owl-carousel owl-theme skill-slider"
-            autoPlay={true}
-            autoPlaySpeed={100}
-            transitionDuration={500}
-            additionalTransfrom={0}
-            arrows={false}
-            draggable={false}
-          >
-            {skillsDetailed.programmingLanguages.map((skill, index) => (
-              <div className="item flex flex-col items-center" key={index}>
-                <div
-                  className={`${
-                    darkMode ? "bg-gray-800" : "bg-white"
-                  } w-24 h-24 flex justify-center items-center mb-3 rounded-full shadow-lg`}
-                >
-                  <img
-                    src={skill.icon}
-                    alt={skill.name}
-                    className="w-2/3 h-2/3"
-                  />
-                </div>
-                <h5
-                  className={`${
-                    darkMode ? "text-gray-300" : "text-gray-900"
-                  } text-lg font-semibold`}
-                >
-                  {skill.name}
-                </h5>
-              </div>
-            ))}
-          </Carousel>
-        </div>
-
-        {/* Frontend Section */}
-        <div className="mb-10">
-          <h3
-            className={`${
-              darkMode ? "text-white" : "text-gray-900"
-            } text-2xl font-semibold mb-4`}
-          >
-            Frontend
-          </h3>
-          <Carousel
-            responsive={responsive}
-            infinite={true}
-            className="owl-carousel owl-theme skill-slider"
-            autoPlay={true}
-            autoPlaySpeed={100}
-            transitionDuration={500}
-            additionalTransfrom={0}
-            arrows={false}
-            draggable={false}
-          >
-            {skillsDetailed.frontend.map((skill, index) => (
-              <div className="item flex flex-col items-center" key={index}>
-                <div
-                  className={`${
-                    darkMode ? "bg-gray-800" : "bg-white"
-                  } w-24 h-24 flex justify-center items-center mb-3 rounded-full shadow-lg`}
-                >
-                  <img
-                    src={skill.icon}
-                    alt={skill.name}
-                    className="w-2/3 h-2/3"
-                  />
-                </div>
-                <h5
-                  className={`${
-                    darkMode ? "text-gray-300" : "text-gray-900"
-                  } text-lg font-semibold`}
-                >
-                  {skill.name}
-                </h5>
-              </div>
-            ))}
-          </Carousel>
-        </div>
-
-        {/* Database Section */}
-        <div className="mb-10">
-          <h3
-            className={`${
-              darkMode ? "text-white" : "text-gray-900"
-            } text-2xl font-semibold mb-4`}
-          >
-            Database
-          </h3>
-          <Carousel
-            responsive={responsive}
-            infinite={true}
-            className="owl-carousel owl-theme skill-slider"
-            autoPlay={true}
-            autoPlaySpeed={100}
-            transitionDuration={500}
-            additionalTransfrom={0}
-            arrows={false}
-            draggable={false}
-          >
-            {skillsDetailed.database.map((skill, index) => (
-              <div className="item flex flex-col items-center" key={index}>
-                <div
-                  className={`${
-                    darkMode ? "bg-gray-800" : "bg-white"
-                  } w-24 h-24 flex justify-center items-center mb-3 rounded-full shadow-lg`}
-                >
-                  <img
-                    src={skill.icon}
-                    alt={skill.name}
-                    className="w-2/3 h-2/3"
-                  />
-                </div>
-                <h5
-                  className={`${
-                    darkMode ? "text-gray-300" : "text-gray-900"
-                  } text-lg font-semibold`}
-                >
-                  {skill.name}
-                </h5>
-              </div>
-            ))}
-          </Carousel>
-        </div>
-
-        {/* Background Image */}
+   <section
+    className={`${darkMode ? "bg-gray-900" : "bg-gray-100 "} py-20 relative`}
+    id="skills"
+    ref={ref}
+  >
+    <div className="container mx-auto px-6 ">
+      <div className="text-center mb-12">
+        <h2
+          className={`${
+            darkMode ? "text-white" : "text-gray-900"
+          } text-4xl font-bold`}
+        >
+          Skills
+        </h2>
       </div>
-    </section>
-  );
-};
+
+      {/* Animate words */}
+      <div className="flex flex-wrap justify-center mb-10">
+        {words.map((word, index) => (
+          <motion.span
+            key={index}
+            id={`word-${index}`} // Assign an ID to each word
+            initial={{ opacity: 0, y: 20 }}
+            animate={
+              visibleWords[index]
+                ? { opacity: 1, y: 0 }
+                : { opacity: 0, y: 20 }
+            } // Animate based on visibility
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className={`${
+              darkMode ? "text-gray-300" : "text-black"
+            } text-xl font-medium mr-2 mb-2`}
+          >
+            {word}
+          </motion.span>
+        ))}
+      </div>
+
+      {/* Programming Languages Section */}
+      <div className="mb-10">
+        <h3
+          className={`${
+            darkMode ? "text-white" : "text-gray-900"
+          } text-2xl font-semibold mb-4`}
+        >
+          Programming Languages
+        </h3>
+        <Carousel
+          responsive={responsive}
+          infinite={true}
+          className="owl-carousel owl-theme skill-slider"
+          autoPlay={true}
+          autoPlaySpeed={100}
+          transitionDuration={500}
+          additionalTransfrom={0}
+          arrows={false}
+          draggable={false}
+        >
+          {skillsDetailed.programmingLanguages.map((skill, index) => (
+            <div className="item flex flex-col items-center" key={index}>
+              <div
+                className={`${
+                  darkMode ? "bg-gray-800" : "bg-white"
+                } w-24 h-24 flex justify-center items-center mb-3 rounded-full shadow-lg`}
+              >
+                <img
+                  src={skill.icon}
+                  alt={skill.name}
+                  className="w-2/3 h-2/3"
+                />
+              </div>
+              <h5
+                className={`${
+                  darkMode ? "text-gray-300" : "text-gray-900"
+                } text-lg font-semibold`}
+              >
+                {skill.name}
+              </h5>
+            </div>
+          ))}
+        </Carousel>
+      </div>
+
+      {/* Frontend Section */}
+      <div className="mb-10">
+        <h3
+          className={`${
+            darkMode ? "text-white" : "text-gray-900"
+          } text-2xl font-semibold mb-4`}
+        >
+          Frontend
+        </h3>
+        <Carousel
+          responsive={responsive}
+          infinite={true}
+          className="owl-carousel owl-theme skill-slider"
+          autoPlay={true}
+          autoPlaySpeed={100}
+          transitionDuration={500}
+          additionalTransfrom={0}
+          arrows={false}
+          draggable={false}
+        >
+          {skillsDetailed.frontend.map((skill, index) => (
+            <div className="item flex flex-col items-center" key={index}>
+              <div
+                className={`${
+                  darkMode ? "bg-gray-800" : "bg-white"
+                } w-24 h-24 flex justify-center items-center mb-3 rounded-full shadow-lg`}
+              >
+                <img
+                  src={skill.icon}
+                  alt={skill.name}
+                  className="w-2/3 h-2/3"
+                />
+              </div>
+              <h5
+                className={`${
+                  darkMode ? "text-gray-300" : "text-gray-900"
+                } text-lg font-semibold`}
+              >
+                {skill.name}
+              </h5>
+            </div>
+          ))}
+        </Carousel>
+      </div>
+
+      {/* Database Section */}
+      <div className="mb-10">
+        <h3
+          className={`${
+            darkMode ? "text-white" : "text-gray-900"
+          } text-2xl font-semibold mb-4`}
+        >
+          Database
+        </h3>
+        <Carousel
+          responsive={responsive}
+          infinite={true}
+          className="owl-carousel owl-theme skill-slider"
+          autoPlay={true}
+          autoPlaySpeed={100}
+          transitionDuration={500}
+          additionalTransfrom={0}
+          arrows={false}
+          draggable={false}
+        >
+          {skillsDetailed.database.map((skill, index) => (
+            <div className="item flex flex-col items-center" key={index}>
+              <div
+                className={`${
+                  darkMode ? "bg-gray-800" : "bg-white"
+                } w-24 h-24 flex justify-center items-center mb-3 rounded-full shadow-lg`}
+              >
+                <img
+                  src={skill.icon}
+                  alt={skill.name}
+                  className="w-2/3 h-2/3"
+                />
+              </div>
+              <h5
+                className={`${
+                  darkMode ? "text-gray-300" : "text-gray-900"
+                } text-lg font-semibold`}
+              >
+                {skill.name}
+              </h5>
+            </div>
+          ))}
+        </Carousel>
+      </div>
+
+      {/* Background Image */}
+    </div>
+  </section>
+  )
+}
+
+export default Skills
