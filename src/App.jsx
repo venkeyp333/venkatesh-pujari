@@ -1,17 +1,19 @@
-import { Suspense, lazy, useState } from 'react';
-import { FaEnvelope } from 'react-icons/fa'; // Import an envelope icon for the floating button
+import { Suspense, lazy, useState } from "react";
+import { FaEnvelope } from "react-icons/fa"; // Import an envelope icon for the floating button
 import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
-import './index.css';
+import "./index.css";
 import { useSelector } from "react-redux"; // Import useSelector
-import ErrorBoundary from './components/ErrorBoundary'; // Import ErrorBoundary
+import ErrorBoundary from "./components/ErrorBoundary"; // Import ErrorBoundary
 
 // Lazy load components
-const Banner = lazy(() => import("./components/Banner"));
+const Banner = lazy(() => import("./components/Banner.jsx"));
 const Skills = lazy(() => import("./components/Skills"));
 const Projects = lazy(() => import("./components/Projects"));
 const Education = lazy(() => import("./components/Education"));
-const Hobbies = lazy(() => import("./components/Hobbies"));
+const ChessSetModel = lazy(() => import("./components/ChessSetModel"));
+
+
 const Contact = lazy(() => import("./components/Contact"));
 
 function App() {
@@ -19,12 +21,16 @@ function App() {
   const [isContactOpen, setIsContactOpen] = useState(false); // State to toggle Contact component
 
   const toggleContact = () => {
-    console.log('Toggle Contact Clicked'); // Debugging line
+    console.log("Toggle Contact Clicked"); // Debugging line
     setIsContactOpen(!isContactOpen); // Toggle the Contact component visibility
   };
 
   return (
-    <div className={`App min-h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'} pt-16`}>
+    <div
+      className={`App min-h-screen ${
+        darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"
+      } pt-16`}
+    >
       {/* Sticky Navbar */}
       <NavBar />
 
@@ -35,7 +41,7 @@ function App() {
           <Skills />
           <Projects />
           <Education />
-          <Hobbies />
+          <ChessSetModel />
         </Suspense>
       </ErrorBoundary>
 
@@ -54,7 +60,7 @@ function App() {
       <Footer />
 
       {/* Floating contact icon at the bottom right */}
-      <button 
+      <button
         className="fixed bottom-8 right-8 bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-600 transition-transform transform hover:scale-105"
         onClick={toggleContact}
         aria-label="Contact Us"

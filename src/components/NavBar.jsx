@@ -6,6 +6,9 @@ import { faSun, faMoon, faBars, faTimes } from '@fortawesome/free-solid-svg-icon
 import { useState, useRef, useEffect } from "react";
 import lightSwitchSound from '../assets/Audio/light-switch-81967.mp3';
 import { Link } from 'react-scroll';
+import VenkeyLogo from '../assets/Logo/venkey.png';
+
+
 
 export const NavBar = () => {
   const dispatch = useDispatch();
@@ -38,7 +41,17 @@ export const NavBar = () => {
   return (
     <nav className={`${darkMode ? "bg-black text-white" : "bg-white text-black"} fixed w-full top-0 left-0 shadow-lg transition-all duration-300 ease-in-out z-50`}>
       <div className="max-w-7xl mx-auto flex justify-between items-center p-4">
-        <div className="text-xl font-bold">MyApp</div>
+     
+        {/* Responsive Logo Image */}
+        <div className="text-xl font-bold">
+          <img
+            src={VenkeyLogo}
+            alt="Venkey Logo"
+            className="h-auto w-auto max-h-12" // Adjust as needed
+          />
+        </div>
+
+       
 
         <div className="hidden md:flex space-x-4">
           {sections.map((section) => (
