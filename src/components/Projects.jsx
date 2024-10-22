@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import urbanKartLogo from "../assets/img/ProjectImages/UrbanKart.jpg"; 
-import AiimsLogo from "../assets/img/ProjectImages/UrbanKart.jpg"; 
+import AiimsLogo from "../assets/Logo/aiims.jpg";
 import TicketManagementlogo from "../assets/img/ProjectImages/tickectManagementLogo.png"; 
 import { useSelector } from "react-redux"; 
 
@@ -38,12 +38,15 @@ function ProjectImage({ id, imgUrl, title, description, darkMode }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <motion.div className={`overflow-hidden rounded-lg shadow-lg ${darkMode ? 'bg-gray-800' : 'bg-white'}`}> {/* Conditional background color */}
+      <motion.div
+        className={`overflow-hidden rounded-full shadow-lg ${darkMode ? 'bg-gray-800' : 'bg-white'}`}
+        style={{ width: '300px', height: '300px', position: 'relative' }} // Fixed size for the circular card
+      >
         <motion.img
           src={imgUrl}
           alt={`Project ${id}`}
-          style={{ x }}
-          className="w-1/2 h-auto mx-auto transition-transform duration-500 hover:scale-105"
+          style={{ x, borderRadius: '50%' }}
+          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" // Ensures the image covers the card
         />
       </motion.div>
 
@@ -52,14 +55,11 @@ function ProjectImage({ id, imgUrl, title, description, darkMode }) {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
           variants={letterVariants}
-          className={`text-xl font-semibold md:text-2xl ${darkMode ? 'text-white' : 'text-gray-800'}`} // Conditional text color
+          className={`text-xl font-semibold md:text-2xl ${darkMode ? 'text-white' : 'text-gray-800'}`}
         >
           <div>
             {splitText(title).map((char, index) => (
-              <motion.span
-                key={index}
-                variants={letterVariants}
-              >
+              <motion.span key={index} variants={letterVariants}>
                 {char === " " ? "\u00A0" : char}
               </motion.span>
             ))}
@@ -70,7 +70,7 @@ function ProjectImage({ id, imgUrl, title, description, darkMode }) {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className={`text-gray-600 mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`} // Conditional text color
+          className={`text-gray-600 mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
         >
           {description}
         </motion.p>
@@ -110,11 +110,15 @@ export const Projects = () => {
     <div
       id="projects"
       ref={ref}
-      className={`w-full px-4 py-10 ${darkMode ? 'bg-gray-900' : 'bg-gray-100'}`} // Conditional background color
+      className={`w-full px-4 py-10 ${darkMode ? 'bg-gray-900' : 'bg-gray-100'}`}
     >
       <div className="text-center mb-8">
-        <h2 className={`text-4xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Our Amazing Projects</h2>
-        <p className={`text-lg mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Explore the innovative solutions we've created</p>
+        <h2 className={`text-4xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+          My Amazing Projects
+        </h2>
+        <p className={`text-lg mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+          Explore the innovative solutions we've created
+        </p>
         <div className="mt-4 border-b-2 border-blue-500 w-24 mx-auto" />
       </div>
 
@@ -126,7 +130,7 @@ export const Projects = () => {
             imgUrl={project.imgUrl}
             title={project.title}
             description={project.description}
-            darkMode={darkMode} // Pass darkMode to ProjectImage
+            darkMode={darkMode}
           />
         ))}
       </div>

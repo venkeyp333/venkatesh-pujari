@@ -43,7 +43,7 @@ const ChessSetModel = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Click to view 3d Models
+          Click to view more 3d Models
         </a>
       </div>
     </div>
