@@ -19,10 +19,15 @@ const ChessSetModel = () => {
 
   return (
     <div
-      className={`flex flex-col items-center justify-center h-screen ${
+    id="hobbies"
+      className={`flex flex-col items-center justify-center h-screen mb-4 ${
         darkMode ? "bg-gray-900 text-white" : "bg-white text-black"
       }`}
     >
+<h1 className={`text-4xl font-bold p-4 rounded-lg shadow-lg ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"} transition duration-300 ease-in-out`}>
+  Hobbies
+</h1>
+
       {/* Increased the size of the 3D model container */}
       <div className="w-3/4 h-3/4 p-4">
         <Canvas>
@@ -34,12 +39,12 @@ const ChessSetModel = () => {
       </div>
 
       {/* Instructions Section */}
-      <div className="mt-4 text-center">
+      <div className="mt-4 text-center mb-4">
         <h2 className="text-lg font-bold">Explore the Chess Set!</h2>
         <p className="mt-2">Use your mouse to rotate and zoom in/out.</p>
         <a
           href="https://venkeyp333.github.io/3D-Models/"
-          className="mt-2 text-blue-600 hover:underline"
+          className="mt-2 text-blue-600 hover:underline mb-4"
           target="_blank"
           rel="noopener noreferrer"
         >

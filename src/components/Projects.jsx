@@ -1,79 +1,67 @@
-import React, { useRef, useState } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import urbanKartLogo from "../assets/img/ProjectImages/UrbanKart.jpg"; 
 import AiimsLogo from "../assets/Logo/aiims.jpg";
 import TicketManagementlogo from "../assets/img/ProjectImages/tickectManagementLogo.png"; 
 import { useSelector } from "react-redux"; 
 
-const splitText = (text) => text.split("");
-
-function useParallax(value, distance) {
-  return useTransform(value, [0, 1], [distance, -distance]);
-}
+gsap.registerPlugin(ScrollTrigger);
 
 function ProjectImage({ id, imgUrl, title, description, darkMode }) {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref });
-  const x = useParallax(scrollYProgress, 300);
-  const [hovered, setHovered] = useState(false);
-  const inView = useInView(ref, { once: false });
+  const cardRef = useRef(null);
 
-  const letterVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 10,
-      },
-    },
-  };
+  useEffect(() => {
+    if (cardRef.current) {
+      gsap.fromTo(
+        cardRef.current,
+        { opacity: 0, y: 80, rotate: 10, scale: 0.9 },
+        {
+          opacity: 1,
+          y: 0,
+          rotate: 0,
+          scale: 1,
+          duration: 1.5,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: cardRef.current,
+            start: "top 85%",
+            toggleActions: "restart none none none",
+          },
+          stagger: 0.3,
+        }
+      );
+    }
+  }, []);
 
   return (
-    <section
-      ref={ref}
-      className="mb-10 w-full"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <motion.div
-        className={`overflow-hidden rounded-full shadow-lg ${darkMode ? 'bg-gray-800' : 'bg-white'}`}
-        style={{ width: '300px', height: '300px', position: 'relative' }} // Fixed size for the circular card
+    <section ref={cardRef} className="mb-10 w-full flex flex-col items-center">
+      <div
+        className={`overflow-hidden rounded-lg shadow-lg transform transition-all duration-500 hover:scale-105 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}
+        style={{
+          width: '300px',
+          height: '300px',
+          position: 'relative',
+          background: darkMode ? 'linear-gradient(145deg, #1f2937, #111827)' : 'linear-gradient(145deg, #ffffff, #e5e7eb)',
+          boxShadow: darkMode
+            ? '20px 20px 60px #0b0e15, -20px -20px 60px #323e54'
+            : '20px 20px 60px #d1d5db, -20px -20px 60px #ffffff',
+        }}
       >
-        <motion.img
+        <img
           src={imgUrl}
           alt={`Project ${id}`}
-          style={{ x, borderRadius: '50%' }}
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" // Ensures the image covers the card
+          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
         />
-      </motion.div>
+      </div>
 
-      <div className="mt-4 text-center">
-        <motion.h2
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          variants={letterVariants}
-          className={`text-xl font-semibold md:text-2xl ${darkMode ? 'text-white' : 'text-gray-800'}`}
-        >
-          <div>
-            {splitText(title).map((char, index) => (
-              <motion.span key={index} variants={letterVariants}>
-                {char === " " ? "\u00A0" : char}
-              </motion.span>
-            ))}
-          </div>
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.5 }}
-          className={`text-gray-600 mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
-        >
+      <div className="mt-4 text-center w-full flex flex-col items-center">
+        <h2 className={`text-xl font-semibold ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+          {title}
+        </h2>
+        <p className={`mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
           {description}
-        </motion.p>
+        </p>
       </div>
     </section>
   );
@@ -102,14 +90,9 @@ export const Projects = () => {
     },
   ];
 
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll();
-  const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
   return (
     <div
       id="projects"
-      ref={ref}
       className={`w-full px-4 py-10 ${darkMode ? 'bg-gray-900' : 'bg-gray-100'}`}
     >
       <div className="text-center mb-8">
@@ -134,11 +117,6 @@ export const Projects = () => {
           />
         ))}
       </div>
-
-      <motion.div
-        className="bg-blue-500 h-1 mt-6 w-full"
-        style={{ scaleX }}
-      />
     </div>
   );
 };

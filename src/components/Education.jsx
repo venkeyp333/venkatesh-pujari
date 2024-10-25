@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux'; // Import useSelector for Redux state
+import { useSelector } from 'react-redux';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -79,7 +79,7 @@ function Education() {
       <Slider {...settings}>
         {educationData.map((edu, index) => (
           <div key={index} className="px-4">
-            <div className={`shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105 ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`}>
+            <div className={`shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105 ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'} h-full md:h-80`}>
               <img 
                 src={edu.image} 
                 alt={edu.institution} 
